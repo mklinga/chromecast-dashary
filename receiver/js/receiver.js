@@ -15,6 +15,7 @@ const dashboards = {
   },
   UNSPLASH: (() => {
     let changeInterval = null;
+    let timestampInterval = null;
     return {
       name: 'Unsplash',
       onMount: () => {
@@ -22,20 +23,24 @@ const dashboards = {
         $root.innerHTML = `
           <div>
             <img />
-            <div class="unsplash-statusbar"></div>
+            <div class="unsplash-timestamp"></div>
           </div>
         `;
 
         $root.querySelector('img').src = `https://source.unsplash.com/random/1280x720?sig=${i}`;
-        $root.querySelector('.unsplash-statusbar').textContent = moment().format('D.M. HH:mm');
+        $root.querySelector('.unsplash-timestamp').textContent = moment().format('HH:mm');
 
         changeInterval = window.setInterval(() => {
           $root.querySelector('img').src = `https://source.unsplash.com/random/1280x720?sig=${++i}`;
-          $root.querySelector('.unsplash-statusbar').textContent = moment().format('D.M. HH:mm');
         }, 15 * 60 * 1000);
+
+        timestampInterval = window.setInterval(() => {
+          $root.querySelector('.unsplash-timestamp').textContent = moment().format('HH:mm');
+        }, 60 * 1000);
       },
       onUnmount: () => {
         window.clearInterval(changeInterval);
+        window.clearInterval(timestampInterval);
         $root.innerHTML = '';
       }
     };

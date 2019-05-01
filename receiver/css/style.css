@@ -9,17 +9,16 @@
   color: black;
 }
 
-.unsplash-statusbar {
+.unsplash-timestamp {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 1280px;
-  height: 80px;
-  background: rgba(0,0,0,0.4);
+  top: 50px;
+  right: 50px;
+  background: rgba(0,0,0,0.5);
   color: #ccc;
   display: flex;
   align-items: center;
-  padding: 0 50px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 48px;
   font-family: sans-serif;
   justify-content: flex-end;
