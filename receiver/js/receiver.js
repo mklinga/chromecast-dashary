@@ -81,4 +81,6 @@ context.addCustomMessageListener(MESSAGE_CHANNEL, function (customEvent) {
   document.querySelector('#root').appendChild(next);
 });
 
-context.start();
+const options = new cast.framework.CastReceiverOptions();
+options.disableIdleTimeout = true;
+context.start(options);
