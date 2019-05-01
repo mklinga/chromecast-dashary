@@ -11,10 +11,10 @@
 
 .unsplash-timestamp {
   position: absolute;
-  top: 50px;
-  right: 50px;
-  background: rgba(0,0,0,0.5);
-  color: #ccc;
+  bottom: 25px;
+  right: 25px;
+  color: #d0d0d0;
+  text-shadow: 0 0 4px black, 0 0 4px black;
   display: flex;
   align-items: center;
   padding: 8px 16px;
