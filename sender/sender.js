@@ -1,32 +1,28 @@
-/* global cast */
+/* global cast, chrome */
 
-const input = document.getElementById('sms');
-input.addEventListener('change', (e) => {
-  console.log('GOT CHANGE', e.target.value);
-  var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+const $dasharyKitty = document.getElementById('dashary-kitty');
+const $dasharyUnsplash = document.getElementById('dashary-unsplash');
+
+const changeDashary = nextDashary => (e) => {
+  const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   if (castSession) {
-    console.log('HAS castSession');
     castSession.sendMessage('urn:x-cast:website.suspicious.cast.info', {
-      type: 'TEST_MESSAGE',
-      value: e.target.value,
-      requestId: 1
+      type: 'CHANGE_DASHARY',
+      value: nextDashary
     });
   }
-});
+};
+
+$dasharyKitty.addEventListener('click', changeDashary('KITTY'));
+$dasharyUnsplash.addEventListener('click', changeDashary('UNSPLASH'));
 
 window['__onGCastApiAvailable'] = function (isAvailable) {
-  console.log('CALLING CACACA', isAvailable);
   if (isAvailable) {
-    var options = {};
+    const options = {
+      receiverApplicationId: '17BF17FE',
+      autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+    };
 
-    // options.receiverApplicationId = 'C0868879';
-    options.receiverApplicationId = '17BF17FE';
-    options.autoJoinPolicy = chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED;
-
-    window.cast.framework.CastContext.getInstance().setOptions(options);
-
-    const msg = document.createElement('p');
-    msg.textContent = 'INITIALIZING OK';
-    document.getElementById('messages').appendChild(msg);
+    cast.framework.CastContext.getInstance().setOptions(options);
   }
 };

@@ -1,6 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
 #root {
   width: 100vw;
   height: 100vh;
   background: white;
   color: black;
+}
+
+.unsplash-statusbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1280px;
+  height: 80px;
+  background: rgba(0,0,0,0.4);
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  font-size: 48px;
+  font-family: sans-serif;
+  justify-content: flex-end;
 }
