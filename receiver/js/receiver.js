@@ -53,8 +53,6 @@ const state = {
 
 dashboards.UNSPLASH.onMount();
 
-const isChangeDashboardMessage = event => event && event.data && event.data.type === 'CHANGE_DASHARY';
-
 const changeDashboard = nextDashboard => {
   if (!dashboards[nextDashboard]) {
     return;
@@ -63,6 +61,7 @@ const changeDashboard = nextDashboard => {
   if (state.dashboard.onUnmount) {
     state.dashboard.onUnmount();
   }
+
   state.dashboard = dashboards[nextDashboard];
 
   if (state.dashboard.onMount) {
@@ -70,15 +69,12 @@ const changeDashboard = nextDashboard => {
   }
 };
 
+const isChangeDashboardMessage = event => event && event.data && event.data.type === 'CHANGE_DASHARY';
+
 context.addCustomMessageListener(MESSAGE_CHANNEL, function (customEvent) {
   if (isChangeDashboardMessage(customEvent)) {
     changeDashboard(customEvent.data.value);
-    return;
   }
-
-  const next = document.createElement('p');
-  next.textContent = JSON.stringify(customEvent);
-  document.querySelector('#root').appendChild(next);
 });
 
 const options = new cast.framework.CastReceiverOptions();

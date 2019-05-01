@@ -3,13 +3,15 @@
 const $dasharyKitty = document.getElementById('dashary-kitty');
 const $dasharyUnsplash = document.getElementById('dashary-unsplash');
 
-const changeDashary = nextDashary => (e) => {
+const changeDashary = nextDashary => () => {
   const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   if (castSession) {
     castSession.sendMessage('urn:x-cast:website.suspicious.cast.info', {
       type: 'CHANGE_DASHARY',
       value: nextDashary
     });
+  } else {
+    console.warn('No cast session found 🤷');
   }
 };
 
